@@ -1,61 +1,66 @@
-subsidio= 0
-print("Q1=Ingresos bajos \n"
-      "Q2=Ingresos medios/bajos \n"
-      "Q3=Ingresos medios \n"
-      "Q4=Ingresos medios/altos \n"
-      "Q5=Ingresos altos")
-quintil=int(input("¿A que quintil perteneces? (1-5): "))
-CL=input("¿Condicion laboral?: ")
-edad=int(input("¿Cual es su edad?: "))
+-----------------------------------------------
+arancel=2200000
+matricula=95000
+promedio=float(input("Ingrese su promedio de notas: "))
+cs=int(input("Ingrese el decil donde se encuentra (1-10): "))
 
-if quintil == 1 or quintil == 2 and CL == "desempleado":
-    subsidio += 12000
-elif quintil == 1 or quintil == 2 and CL == "empleado":
-    subsidio += 10000
-elif quintil == 3 and CL == "desempleado":
-    subsidio += 6000
-elif quintil == 3 and CL == "empleado":
-    subsidio += 4000
-elif quintil == 4 or quintil == 5 and CL == "desempleado" or CL == "empleado":
-    subsidio += 1500
-
-if edad >= 65:
-    subsidio += 3000
-
-print(subsidio)
+if promedio >= 6.5 and cs == 1 or cs == 2 or cs == 3:
+    arancel=(arancel*0.75)
+elif promedio >= 6.5 and cs ==3 or cs==4:
+    arancel=(arancel*0.82)
+elif promedio >5.5 or promedio <=6.5 and cs ==1 or cs==2:
+    arancel=(arancel*0.85)
+elif promedio >5.5 or promedio <=6.5 and cs==1 or cs==2:
+    arancel=(arancel*0.88)
 
 
-import random
-titulo="Bienvenidos a Adivina el numero"
-print("\n" + titulo + "\n"+"-" * len(titulo)+ "\n")
 
-print("Para empezar ingrese dos numeros enteros que representan el rango numérico \n"
-      "(El primer numero debe ser menor que el segundo)")
+elif cs==1 or cs==2 or cs==3:
+    matricula=float(matricula*0.88)
+if cs ==1 or cs==2 or cs==3 and promedio >=6.0:
+      matricula=float(matricula*0.83)
+    
+        
+
+    
+print(f"El valor del arancel es: ${arancel}")
+print(f"El valor de la matricula es: ${matricula}")
+
+
+--------------------------------------------------
+titulo=("Intente adivinar el numero establecido")
+print("\n" + titulo + "\n" + "-"*len(titulo) + "\n")
+print("El primer numero debe ser menor que el segundo")
+
 n1=int(input("Ingrese el limite inferior: "))
-n2=int(input("Ingrese el limite superior: "))
-numero = random.randint(n1, n2)
-ajuste= (numero/4)*4
+n2=int(input("Ingrese el limit superior: "))
+puntoMedio=n1+n2/2
+ajuste=(n2-n1)*0.2
+numAle=int(ajuste+puntoMedio)
 
 primer_intento=int(input("Intente adivinar el numero: "))
-if primer_intento == ajuste:
+if primer_intento == numAle:
     print("Felicitaciones, acertaste a la primera")
-elif primer_intento != ajuste:
-    if primer_intento > ajuste:
+    exit()
+elif primer_intento != numAle:
+    if primer_intento > numAle:
         print("El numero es menor")
-    elif primer_intento < ajuste:
+    elif primer_intento < numAle:
         print("El numero es mayor")
         
 segundo_intento=int(input("Intente adivinar el numero: "))
-if segundo_intento == ajuste:
+if segundo_intento == numAle:
     print("Felicidades, acertaste el numero")
-elif segundo_intento != ajuste:
-    if segundo_intento > ajuste:
+    exit()
+elif segundo_intento != numAle:
+    if segundo_intento > numAle:
         print("El numero es menor")
-    elif segundo_intento < ajuste:
+    elif segundo_intento < numAle:
         print("El numero es mayor")
         
 tercer_intento=int(input("Intente adivinar el numero: "))
-if tercer_intento == ajuste:
+if tercer_intento == numAle:
     print("Felicidades, acertaste el numero")
 else:
-    print(f"Perdiste, el numero era {ajuste}") 
+    print(f"Perdiste, el numero era {numAle}") 
+        
