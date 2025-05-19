@@ -23,4 +23,5 @@ while sw==1:
             puntos-=30000
             print(f"Canje exitoso, le quedan {puntos} puntos")
     if op==3:
-        sw=0 ##Tambien se puede usar un exit() o break
+        sw=0 
+        ##Tambien se puede usar un exit() o break
