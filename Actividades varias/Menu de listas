@@ -1,0 +1,47 @@
+lista_elementos=[]
+while True:
+    print("Tienes estas opciones: \n"
+        "1. Insertar al final \n"
+        "2. Insertar en posicion especifica \n"
+        "3. Eliminar elemento \n"
+        "4. Invertir lista \n"
+        "5. Ordenar de menor a mayor \n"
+        "6. Salir")
+    
+    op=int(input("Que opcion deseas?: "))
+    
+    if op==1:
+        cantidad=int(input("Cuantos elementos quieres añadir?: "))
+        for i in range(cantidad):
+            lista_elementos.append(input("Que quieres ingresar?: "))
+        print(f"Tu lista queda asi: {lista_elementos}")
+        break
+    
+    elif op==2:
+        cantidad1=int(input("Cuantos elementos quieres añadir?: "))
+        for i in range(cantidad1):
+            pocision=int(input("En que posicion quieres que este? "))
+            elemento=input("Que quieres ingresar?: ")
+            lista_elementos.insert(pocision, elemento)
+        print(f"Tu lista queda asi: {lista_elementos}")
+        break
+    
+    elif op==3:
+        eliminar=input("Que quieres eliminar?: ")
+        lista_elementos.remove(eliminar)
+        print(f"Tu lista queda asi: {lista_elementos}")
+        break
+    
+    elif op==4:
+        lista_elementos.reverse
+        print(f"Tu lista queda asi: {lista_elementos}")
+        break
+    
+    elif op==5:
+        lista_elementos.sort
+        print(f"Tu lista queda asi: {lista_elementos}")
+        break
+    elif op==6:
+        print("Gracias por usar este menu, hasta luego.")
+        break
+        
