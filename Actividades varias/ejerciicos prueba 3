@@ -1,0 +1,85 @@
+esprimo=0
+noesprimo=0
+
+while True:
+    try:
+        cant_a_verificar=int(input("Ingrese la cantidad de números a verificar: "))
+        break
+    except ValueError:
+        print("El numero a verificar debe ser entero, intentelo de nuevo.")
+
+for i in range(cant_a_verificar):
+    while True:
+        try:
+            nums=int(input("Ingrese los numeros que deseas verificar: "))
+            break
+        except ValueError:
+            print("El numero a verificar debe ser entero, intentelo de nuevo.")
+
+    primo=True
+    if nums < 2:
+        primo = False
+    else:
+        for i in range(2, int(nums**0.5)+1):
+            if nums % i == 0:
+                primo = False
+                break
+    if primo:
+        print("Es primo")
+        esprimo+=1
+    else:
+        print("No es primo")
+        noesprimo+=1
+
+print(f"El numero total de primos es: {esprimo}")
+print(f"El numero total de  no primos es: {noesprimo}")
+
+----------------------------------------------------------------------------
+
+mayor=None
+menor=None
+
+while True:
+    try:
+        op=int(input("*** MENU PRINCIPAL *** \n"
+                     "1.- Ingrese numero. \n"
+                     "2.- Mostrar mayor. \n"
+                     "3.- Mostrar menor. \n"
+                     "4.- Salir. \n"
+                     "Eliga una opcion: "))
+        
+        if op==1:
+            while True:
+                try:
+                    num=int(input("Ingrese un numero entre el 1 y el 100: "))
+                    if 0 <= num <= 100:
+                        print("Ingreso exitoso")
+                    
+                        if mayor is None or num > mayor:
+                            mayor = num
+                        if menor is None or num < menor:
+                            menor = num
+                            break
+                    else:
+                        print("Debe ingresar un numero del 1 al 100")
+                except ValueError:
+                    print("Debe ingresar un numero entero")
+        
+        if op==2:
+            if mayor is None:
+                print("No se han ingresado numeros")
+            else:
+                print(f"EL numero mayor hasta el momento es: {mayor}")
+        
+        if op==3:
+            if menor is None:
+                print("No se han ingresado numeros")
+            else:
+                print(f"El numero menos hasta el momento es: {menor} ")
+        
+        if op==4:
+            print("Fin del programa. Adios.")
+            break
+    
+    except ValueError:
+        print("Seleccione una opcion valida")
