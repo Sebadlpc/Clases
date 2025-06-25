@@ -1,0 +1,92 @@
+informacion_compradores = {
+    "nombres": [],
+    "entradas": [],
+    "codigo": []
+}
+
+def validar_codigo(codigo):
+    return (
+        len(codigo) >= 6 and
+        any(char.isdigit() for char in codigo) and
+        any(char.isupper() for char in codigo) and
+        " " not in codigo
+    )
+
+def obtener_datos_comprador():
+    while True:
+        nombre = input("Ingrese su nombre: ")
+        if nombre in informacion_compradores["nombres"]:
+            print("Este nombre ya está registrado, intente de nuevo.")
+            continue
+        break
+
+    while True:
+        tipo = input("Ingrese tipo de entrada (G/V): ").upper()
+        if tipo in ["G", "V"]:
+            break
+        else:
+            print("Tipo de entrada inválido. Solo se acepta 'G' o 'V'.")
+
+    while True:
+        codigo = input("Ingrese código de confirmación: ")
+        if validar_codigo(codigo):
+            break
+        else:
+            print("El código debe tener al menos 6 caracteres, una mayúscula, un número y sin espacios.")
+
+    return nombre, tipo, codigo
+
+def comprar_entrada():
+    try:
+        nombre, tipo, codigo = obtener_datos_comprador()
+        informacion_compradores["nombres"].append(nombre)
+        informacion_compradores["entradas"].append(tipo)
+        informacion_compradores["codigo"].append(codigo)
+        print("✅ Entrada registrada exitosamente.")
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
+
+
+------------------------------------------------------------------------
+informacion_compradores={"nombres": ["Sebastian De la Paz"], 
+                         "entradas": ["G"], 
+                         "codigos": ["Sebax31279"]}
+print("Bienvenidos al concierto del 'Conejo Simpatico'")
+while True:
+    try:
+        op=int(input("**** MENU PRINCIPAL ****  \n"
+                    "1. Comprar entrada. \n"
+                    "2. Consultar comprador. \n"
+                    "3. Cancelar compra. \n"
+                    "4. Salir. \n"
+                    "Eliga una de estas opciones: "))
+       
+        if op==1:
+            while True:
+                try:
+                    nombre=input("Ingrese su nombre: ")
+                    if nombre in informacion_compradores["nombres"]:
+                        print("Este nombre ya esta registrado, intente de nuevo")
+                        continue
+                    
+                    else:
+                        informacion_compradores["nombres"].append(nombre)        
+                    informacion_compradores["entradas"].append(input("Ingrese tipo de entrada (G/V): "))
+                    while True:
+                        codigo=input("Ingrese código de confirmación: ")
+                        if len(codigo) >=6 and any (char.isdigit() for char in codigo) and any(char.isupper() for char in codigo):
+                            informacion_compradores["codigo"].append(codigo)
+                            break
+                        else:
+                            print("Ingrese nuevamente")
+                    break
+                except ValueError:
+                    print("Ocurrio un error")
+        
+        if op==2:
+            
+                
+    
+        
+    except ValueError:
+        print("Seleccione una opcion valida")
