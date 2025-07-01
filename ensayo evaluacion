@@ -1,92 +1,83 @@
-informacion_compradores = {
-    "nombres": [],
-    "entradas": [],
-    "codigo": []
-}
+usuarios={"nombre":[], 
+          "sexo":[], 
+          "contraseña":[]}
 
-def validar_codigo(codigo):
-    return (
-        len(codigo) >= 6 and
-        any(char.isdigit() for char in codigo) and
-        any(char.isupper() for char in codigo) and
-        " " not in codigo
-    )
+def validar_contraseña(contraseña):
+    return len(contraseña)>=8 and\
+        any (char.isdigit() for char in contraseña) and \
+        any (char.isupper() for char in contraseña) and \
+        " " not in contraseña
 
-def obtener_datos_comprador():
+def validar_usuario():
     while True:
-        nombre = input("Ingrese su nombre: ")
-        if nombre in informacion_compradores["nombres"]:
-            print("Este nombre ya está registrado, intente de nuevo.")
+        nombre=input("Ingrese su nombre completo: ")
+        if nombre in usuarios["nombre"]:
+            print("El nombre ya esta registrado, intente nuevamente")
             continue
-        break
-
-    while True:
-        tipo = input("Ingrese tipo de entrada (G/V): ").upper()
-        if tipo in ["G", "V"]:
-            break
-        else:
-            print("Tipo de entrada inválido. Solo se acepta 'G' o 'V'.")
-
-    while True:
-        codigo = input("Ingrese código de confirmación: ")
-        if validar_codigo(codigo):
-            break
-        else:
-            print("El código debe tener al menos 6 caracteres, una mayúscula, un número y sin espacios.")
-
-    return nombre, tipo, codigo
-
-def comprar_entrada():
-    try:
-        nombre, tipo, codigo = obtener_datos_comprador()
-        informacion_compradores["nombres"].append(nombre)
-        informacion_compradores["entradas"].append(tipo)
-        informacion_compradores["codigo"].append(codigo)
-        print("✅ Entrada registrada exitosamente.")
-    except Exception as e:
-        print(f"Ocurrió un error: {e}")
-
-
-------------------------------------------------------------------------
-informacion_compradores={"nombres": ["Sebastian De la Paz"], 
-                         "entradas": ["G"], 
-                         "codigos": ["Sebax31279"]}
-print("Bienvenidos al concierto del 'Conejo Simpatico'")
-while True:
-    try:
-        op=int(input("**** MENU PRINCIPAL ****  \n"
-                    "1. Comprar entrada. \n"
-                    "2. Consultar comprador. \n"
-                    "3. Cancelar compra. \n"
-                    "4. Salir. \n"
-                    "Eliga una de estas opciones: "))
-       
-        if op==1:
-            while True:
-                try:
-                    nombre=input("Ingrese su nombre: ")
-                    if nombre in informacion_compradores["nombres"]:
-                        print("Este nombre ya esta registrado, intente de nuevo")
-                        continue
-                    
-                    else:
-                        informacion_compradores["nombres"].append(nombre)        
-                    informacion_compradores["entradas"].append(input("Ingrese tipo de entrada (G/V): "))
-                    while True:
-                        codigo=input("Ingrese código de confirmación: ")
-                        if len(codigo) >=6 and any (char.isdigit() for char in codigo) and any(char.isupper() for char in codigo):
-                            informacion_compradores["codigo"].append(codigo)
-                            break
-                        else:
-                            print("Ingrese nuevamente")
-                    break
-                except ValueError:
-                    print("Ocurrio un error")
-        
-        if op==2:
-            
-                
+        return nombre
     
+def validar_sexo():
+    while True:
+        sexo=input("Ingrese su sexo (M/F): ").upper()
+        if sexo in ["M", "F"]:
+            return sexo
+        else:
+            print("Tipo de sexo invalido, intente nuevamente")
+
+def buscar_usuarios(usuarios):
+    buscar = input("Ingrese el nombre del usuario a buscar: ")
+    if buscar in usuarios["nombre"]:
+        posicion=usuarios["nombre"].index(buscar)
+        print(f"Nombre: {usuarios['nombre'][posicion]}, Sexo: {usuarios["sexo"][posicion]}, Contraseña: {usuarios['contraseña'][posicion]}")
+    else:
+        print("EL usuario no se encuentra.")
+    
+def eliminar_usuario(usuarios):
+    buscar=input("Ingrese el nombre del usuario a eliminar: ")
+    if buscar in usuarios["nombre"]:
+        posicion=usuarios["nombre"].index(buscar)
+        usuarios["nombre"].pop(posicion)
+        usuarios["sexo"].pop(posicion)
+        usuarios["contraseña"].pop(posicion)
+        print("Usuario eliminado")
+    else:
+        print("No se pudo eliminar usuario")
+
+def main():
+    while True:
+        try:
+            op=int(input("**** MENU PRINCIPAL **** \n"
+                        "1. Ingresar usuario \n"
+                        "2. Buscar usaurio \n"
+                        "3. Eliminar usaurio \n"
+                        "4. Salir. \n" \
+                        "Eliga una opcion: "))
+            
+            if op == 1:
+                nombre = validar_usuario()
+                sexo = validar_sexo()
+                while True:
+                    contraseña = input("Ingrese su contraseña: ")
+                    if validar_contraseña(contraseña):
+                        print("Ingreso exitoso")
+                        break
+                    else:
+                        print("la contraseña no cumple con los requisitos")
+                usuarios["nombre"].append(nombre)
+                usuarios["sexo"].append(sexo)
+                usuarios["contraseña"].append(contraseña)
+            
+            if op == 2:
+                buscar_usuarios(usuarios)
+            
+            if op == 3:
+                eliminar_usuario(usuarios)
+
+            if op == 4:
+                print("Programa terminado")
+                break
         
-    except ValueError:
-        print("Seleccione una opcion valida")
+        except:
+            print("Debe seleccionar una opcion valida")
+
+main()
